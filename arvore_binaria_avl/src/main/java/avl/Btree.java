@@ -34,6 +34,7 @@ public class Btree {
             return new Node(value);
         }
 
+        // Navegação recursiva para a esquerda e para direita
         if (value < current.value) {
             current.esq = RecursiveInsert(current.esq, value);
 
@@ -45,36 +46,39 @@ public class Btree {
 
         }
 
+        // Atualiza a altura do nó atual
         newHigh(current);
+
+        // Calcula o alarme e verifica o fator de balanceamento
         int balance = Verify(current);
 
-        // ... (depois de 'int balance = Verify(current);') ...
-
-        // Caso 1: Esquerda-Esquerda (Perfeito!)
+        // Caso: Esquerda-Esquerda, caso o peso maior seja na esquerda e o valor foi
+        // inserido na subArvore da ESQUERDA do filho da ESQUERDA
         if (balance < -1 && value < current.esq.value) {
             return RotationDir(current);
         }
 
-        // Caso 2: Direita-Direita (O que estava faltando)
-        // Se pesou à direita E o novo nó foi inserido à direita.
-        if (balance > 1 && value > current.dir.value) { // <-- CONDIÇÃO CORRIGIDA
-            return RotationEsq(current); // <-- CORREÇÃO SIMPLES
+        // Caso: Direita-Direita, caso o peso maior seja na direita e o valor foi
+        // inserido na subArvore da DIREITA do filho da DIREITA
+        if (balance > 1 && value > current.dir.value) {
+            return RotationEsq(current);
         }
 
-        // Caso 3: Esquerda-Direita (Perfeito!)
+        // Caso: Esquerda-Direita, o nó está pesado à esquerda e o valor foi inserido na
+        // subArvore da DIREITA do filho da ESQUERDA
         if (balance < -1 && value > current.esq.value) {
             current.esq = RotationEsq(current.esq);
             return RotationDir(current);
         }
 
-        // Caso 4: Direita-Esquerda (O caso 2 original, agora corrigido)
-        // Se pesou à direita E o novo nó foi inserido à esquerda.
-        if (balance > 1 && value < current.dir.value) { // <-- CONDIÇÃO IGUAL AO SEU CASO 2
-            // CORREÇÃO: Rotação dupla
+        // Caso: Direita-Esquerda, o nó está pesado a direita e o valor inserido na
+        // subArvore da ESQUERDA do filho da DIREITA
+        if (balance > 1 && value < current.dir.value) {
             current.dir = RotationDir(current.dir);
-            return RotationEsq(current); // <-- ERRO ESTAVA AQUI (era RotationDir)
+            return RotationEsq(current);
         }
 
+        // Retorno caso não seja necessário nenhum conserto
         return current;
     }
 
