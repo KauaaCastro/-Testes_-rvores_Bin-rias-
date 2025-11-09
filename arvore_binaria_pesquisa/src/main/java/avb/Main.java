@@ -17,7 +17,7 @@ public class Main {
 
         List<Integer> number = new ArrayList<>();
         String archive = "teste07.txt";
-        String endress = "C:\\Users\\Cricca\\Downloads\\estudos\\Estrutura de Dados\\Teste de desempenho\\testes\\"
+        String endress = "arvore_binaria_pesquisa/src/main/java/avb/testes/"
                 + archive;
 
         try (BufferedReader read = new BufferedReader(new FileReader(endress))) {
