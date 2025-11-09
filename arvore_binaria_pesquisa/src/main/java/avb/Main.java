@@ -12,10 +12,11 @@ public class Main {
         String clear = "\033\143";
         System.out.println(clear);
 
+        System.out.println("Iniciando árvore binária de pesquisa");
         System.out.println("Iniciando a leitura do arquivo...");
 
         List<Integer> number = new ArrayList<>();
-        String archive = "teste01.txt";
+        String archive = "teste07.txt";
         String endress = "C:\\Users\\Cricca\\Downloads\\estudos\\Estrutura de Dados\\Teste de desempenho\\testes\\"
                 + archive;
 

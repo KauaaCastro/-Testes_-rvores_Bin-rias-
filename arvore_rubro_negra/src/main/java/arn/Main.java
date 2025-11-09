@@ -1,4 +1,4 @@
-package avl;
+package arn;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -12,7 +12,7 @@ public class Main {
         String clear = "\033\143";
         System.out.println(clear);
 
-        System.out.println("Iniciando AVL");
+        System.out.println("Iniciando árvore rubro negra");
         System.out.println("Iniciando a leitura do arquivo...");
 
         List<Integer> number = new ArrayList<>();
