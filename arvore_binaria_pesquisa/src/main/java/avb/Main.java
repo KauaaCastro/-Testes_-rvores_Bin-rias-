@@ -16,7 +16,7 @@ public class Main {
         System.out.println("Iniciando a leitura do arquivo...");
 
         List<Integer> number = new ArrayList<>();
-        String archive = "teste07.txt";
+        String archive = "teste01.txt";
         String endress = "arvore_binaria_pesquisa/src/main/java/avb/testes/"
                 + archive;
 
@@ -47,6 +47,8 @@ public class Main {
             double durationFinal = (double) totalTime / 1000000;
 
             double mediumNode = btree.getAddLevel(number.size());
+
+            // double mediumNode = btree.getAddLevel(number.size());
             System.out.println(clear);
             System.out.println("Exibindo Informações:");
             System.out.println("------------------------------------------------");

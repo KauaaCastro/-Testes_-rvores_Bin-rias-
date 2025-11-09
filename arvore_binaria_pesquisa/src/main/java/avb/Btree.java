@@ -1,54 +1,81 @@
 package avb;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class Btree {
     private Node root;
-    private long AdictionLevels;
 
     public Btree() {
         this.root = null;
     }
 
     public void Insert(int value) {
-        ManualInsert(this.root, value);
-    }
+        Node newNode = new Node(value);
 
-    private Node ManualInsert(Node current, int value) {
-        if (current == null) {
-            return new Node(value);
-        }
-
-        if (value < current.value) {
-            current.esq = ManualInsert(current.esq, value);
-
-        } else if (value > current.value) {
-            current.dir = ManualInsert(current.dir, value);
-
-        }
-
-        return current;
-    }
-
-    // Nível Médio:
-    public double getAddLevel(int totalNode) {
-        this.AdictionLevels = 0;
-
-        CalcLevels(this.root, 0);
-
-        if (totalNode == 0) {
-            return 0;
-        }
-
-        return (double) this.AdictionLevels / totalNode;
-    }
-
-    private void CalcLevels(Node node, int currentLevel) {
-        if (node == null) {
+        if (this.root == null) {
+            this.root = newNode;
             return;
         }
 
-        this.AdictionLevels += currentLevel;
+        Node current = this.root;
+        Node parent = null;
 
-        CalcLevels(node.esq, currentLevel + 1);
-        CalcLevels(node.dir, currentLevel + 1);
+        while (true) {
+            parent = current;
+
+            if (value < current.value) {
+                current = current.esq;
+                if (current == null) {
+                    parent.esq = newNode;
+                    return;
+                }
+            } else if (value > current.value) {
+                current = current.dir;
+                if (current == null) {
+                    parent.dir = newNode;
+                    return;
+                }
+            } else {
+                return;
+            }
+        }
+    }
+
+    private static class NoComNivel {
+        Node no;
+        int nivel;
+
+        NoComNivel(Node no, int nivel) {
+            this.no = no;
+            this.nivel = nivel;
+        }
+    }
+
+    public double getAddLevel(int totalNode) {
+        if (totalNode == 0 || this.root == null) {
+            return 0;
+        }
+
+        long AdictionLevels = 0;
+
+        Queue<NoComNivel> fila = new LinkedList<>();
+
+        fila.add(new NoComNivel(this.root, 0));
+
+        while (!fila.isEmpty()) {
+            NoComNivel atual = fila.poll();
+
+            AdictionLevels += atual.nivel;
+
+            if (atual.no.esq != null) {
+                fila.add(new NoComNivel(atual.no.esq, atual.nivel + 1));
+            }
+            if (atual.no.dir != null) {
+                fila.add(new NoComNivel(atual.no.dir, atual.nivel + 1));
+            }
+        }
+
+        return (double) AdictionLevels / totalNode;
     }
 }

@@ -11,7 +11,6 @@ public class Main {
         Btree btree = new Btree();
         String clear = "\033\143";
         System.out.println(clear);
-
         System.out.println("Iniciando árvore rubro negra");
         System.out.println("Iniciando a leitura do arquivo...");
 
@@ -56,6 +55,7 @@ public class Main {
             System.out.println("Arquivo testado: " + archive);
             System.out.println("Tempo de Inserçao: " + durationFinal + " ms");
             System.out.println("Nível médio: " + mediumNode);
+
             System.out.println("------------------------------------------------");
 
         } catch (IOException e) {

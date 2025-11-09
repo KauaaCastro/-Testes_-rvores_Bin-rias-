@@ -17,7 +17,7 @@ public class Main {
 
         List<Integer> number = new ArrayList<>();
         String archive = "teste01.txt";
-        String endress = "arvore_binaria_avl/src/main/java/avb/testes/"
+        String endress = "arvore_binaria_avl/src/main/java/avl/testes/"
                 + archive;
 
         try (BufferedReader read = new BufferedReader(new FileReader(endress))) {
@@ -50,7 +50,7 @@ public class Main {
             System.out.println(clear);
             System.out.println("Exibindo Informações:");
             System.out.println("------------------------------------------------");
-            System.out.println("Tipo: Arvore de Pesquisa Binaria (BST)");
+            System.out.println("Tipo: AVL");
             System.out.println("Arquivo testado: " + archive);
             System.out.println("Tempo de Inserçao: " + durationFinal + " ms");
             System.out.println("Nível médio: " + mediumNode);
