@@ -44,12 +44,16 @@ public class Main {
             Thread.sleep(2000);
 
             long totalTime = finalTime - startedTime;
-
             double durationFinal = (double) totalTime / 1000000;
 
+            double mediumNode = btree.getAddLevel(number.size());
             System.out.println(clear);
+            System.out.println("Exibindo Informações:");
             System.out.println("------------------------------------------------");
-            System.out.println("Contagem final de tempo: " + durationFinal);
+            System.out.println("Tipo: Arvore de Pesquisa Binaria (BST)");
+            System.out.println("Arquivo testado: " + archive);
+            System.out.println("Tempo de Inserçao: " + durationFinal + " ms");
+            System.out.println("Nível médio: " + mediumNode);
             System.out.println("------------------------------------------------");
 
         } catch (IOException e) {

@@ -4,6 +4,7 @@ public class Btree {
     private Node root;
     private static final boolean red = true;
     private static final boolean black = false;
+    private long AdictionLevels;
 
     public Btree() {
         this.root = null;
@@ -151,14 +152,13 @@ public class Btree {
                     // Move o problema para cima
                     current = current.father.father;
                 } else {
-                    // Sub-caso "Zigue-zague" (Esquerda-Direita)
+                    // Caso 1: Esquerda-Direita
                     if (current == current.father.dir) {
                         current = current.father; // Move para o father
                         RotationEsq(current); // Transforma em "linha reta"
                     }
 
-                    // Sub-caso "Linha Reta" (Esquerda-Esquerda)
-                    // Solução: Recolore e rotaciona o avô
+                    // Caso 2: Esquerda-Esquerda
                     setColor(current.father, black);
                     setColor(current.father.father, red);
                     RotationDir(current.father.father);
@@ -172,13 +172,13 @@ public class Btree {
                     setColor(current.father.father, red);
                     current = current.father.father;
                 } else {
-                    // Sub-caso "Zigue-zague" (Direita-Esquerda)
+                    // Caso 3: Direita-Esquerda
                     if (current == current.father.esq) {
                         current = current.father;
                         RotationDir(current); // Transforma em "linha reta"
                     }
 
-                    // Sub-caso "Linha Reta" (Direita-Direita)
+                    // Caso 4: Direita-Direita
                     setColor(current.father, black);
                     setColor(current.father.father, red);
                     RotationEsq(current.father.father);
@@ -186,5 +186,29 @@ public class Btree {
             }
         } // Fim do loop 'while'
         this.root.color = black;
+    }
+
+    // Nível Médio:
+    public double getAddLevel(int totalNode) {
+        this.AdictionLevels = 0;
+
+        CalcLevels(this.root, 0);
+
+        if (totalNode == 0) {
+            return 0;
+        }
+
+        return (double) this.AdictionLevels / totalNode;
+    }
+
+    private void CalcLevels(Node node, int currentLevel) {
+        if (node == null) {
+            return;
+        }
+
+        this.AdictionLevels += currentLevel;
+
+        CalcLevels(node.esq, currentLevel + 1);
+        CalcLevels(node.dir, currentLevel + 1);
     }
 }
